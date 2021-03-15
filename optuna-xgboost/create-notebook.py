@@ -1,25 +1,11 @@
 import coiled
 
-conda = {
-    "channels": ["conda-forge"],
-    "dependencies": [
-        "python=3.8",
-        "dask",
-        "coiled=0.0.37",
-        "optuna",
-        "numpy",
-        "scikit-learn",
-        "xgboost",
-        "joblib",
-    ],
-}
 
 # Create cluster software environment
 software_name = "examples/optuna-xgboost"
 coiled.create_software_environment(
     name=software_name,
-    conda=conda,
-    pip=["dask-optuna"],
+    conda="environment.yaml",
 )
 
 # Create notebook job software environment
@@ -27,8 +13,7 @@ software_notebook_name = software_name + "-notebook"
 coiled.create_software_environment(
     name=software_notebook_name,
     container="coiled/notebook:latest",
-    conda=conda,
-    pip=["dask-optuna"],
+    conda="environment.yaml",
 )
 
 coiled.create_job_configuration(
