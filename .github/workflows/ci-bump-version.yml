@@ -25,6 +25,21 @@ jobs:
           replace: "coiled=${{ steps.latest_version_coiled.outputs.version }}"
           include: "create-notebook.py"
 
+      - name: Get latest dask version
+        id: latest_version_dask
+        uses: jacobtomlinson/gha-anaconda-package-version@0.1.1
+        with:
+          org: "conda-forge"
+          package: "dask"
+
+      - name: Find and replace dask version
+        id: find_and_replace_dask
+        uses: jacobtomlinson/gha-find-replace@0.1.1
+        with:
+          find: "dask=[.0-9]+"
+          replace: "dask=${{ steps.latest_version_dask.outputs.version }}"
+          include: "create-notebook.py"
+
       - name: Output changed files
         run: |
           echo ${{ steps.find_and_replace_coiled.outputs.modifiedFiles }}
