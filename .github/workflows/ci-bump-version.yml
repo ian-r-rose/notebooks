@@ -1,13 +1,11 @@
 name: Check for new Coiled and dask versions on conda-forge
 
-on:
-  schedule:
-    - cron: "36 * * * *"
+on: push
 
 jobs:
   check-version:
     runs-on: ubuntu-latest
-    if: github.repository == 'coiled/notebooks'
+    if: github.repository == 'ian-r-rose/notebooks'
 
     steps:
       - uses: actions/checkout@v2
